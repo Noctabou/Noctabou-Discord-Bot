@@ -19,7 +19,6 @@ global actif
 server = False
 nocta = 317596360775958538
 actif= True
-token=None
 # Fonctions
 if os.getlogin()=="noctabou":
     server = True
@@ -453,90 +452,4 @@ if server:
     running = MCServerRunning()
     print("Server is running: " + str(running))
 """COMMANDS##############################################################################################################################################################"""
-
-"""HELP##############################################################################################################################################################"""
-client.remove_command("help")
-"""help=client.create_group(name="help",description="Affiche l'aide du bot.")
-
-@help.command(name="commands",description="Affiche l'aide du bot.")
-async def commands(ctx):
-    embed = discord.Embed(title="Commandes du Bot",
-                          description="", color=0x00ff00)
-    embed.add_field(name="°ping", value="Pong!", inline=False)
-    embed.add_field(
-        name="°msgcount", value="Affiche le nombre de messages depuis le lancement du bot", inline=False)
-    embed.add_field(
-        name="°userinfo", value="Affiche les informations sur l'utilisateur mentionné", inline=False)
-    embed.add_field(
-        name="°pp", value="Affiche la photo de profil de l'utilisateur mentionné", inline=False)
-    embed.add_field(
-        name="°rançais", value="Convertit un message en langue française", inline=False)
-    embed.add_field(name="°lettermoji",
-                    value="Convertit la première lettre de chaque mot en lettre emoji", inline=False)
-    embed.add_field(
-        name="°delete", value="Supprime un nombre de messages d'un utilisateur, ou du tchat si aucun n'est mentionné", inline=False)
-    embed.add_field(name="°killbot",
-                    value="Ferme le bot. (owner only)", inline=False)
-    embed.add_field(
-        name="°stopPC", value="Eteint le pc. (owner only)", inline=False)
-    embed.add_field(
-        name="°help", value="Affiche les commandes du bot", inline=False)
-    embed.add_field(name="°help <commande>",
-                    value="Affiche les informations sur une commande", inline=False)
-    embed.add_field(name="#########Server Commandes#########",
-                    value="Commandes qui contrôlent le serveur MC Server")
-    embed.add_field(name="°MCStart",
-                    value="Ouvre le serveur (gérants only)", inline=False)
-    embed.add_field(
-        name="°MCStop", value="Ferme le serveur (gérants only)", inline=False)
-    embed.add_field(name="°MCSelectServer",
-                    value="Sélectionne le serveur à utiliser (gérants only)", inline=False)
-    embed.add_field(name="°MCKeepInventory",
-                    value="Change la gamerule keepInventory sur le serveur", inline=False)
-    embed.add_field(name="°MCPlaying",
-                    value="Affiche le nombre de joueurs sur le serveur", inline=False)
-
-    await ctx.respond(embed=embed)
-
-
-@help.command()
-async def userinfo(ctx):
-    await ctx.respond("Affiche les informations sur l'utilisateur mentionné\n**Syntaxe:** `°userinfo [@utilisateur]`")
-
-
-@help.command()
-async def pp(ctx):
-    await ctx.respond("Affiche la photo de profil de l'utilisateur mentionné\n**Syntaxe:** `°pp [@utilisateur]`")
-
-
-@help.command()
-async def rançais(ctx):
-    await ctx.respond("Convertit un message en langue rançaise\n**Syntaxe:** `°rançais [message]`")
-
-
-@help.command()
-async def lettermoji(ctx):
-    await ctx.respond("Convertit la première lettre de chaque mot en lettre emoji\n**Syntaxe:** `°lettermoji [message]`")
-
-
-@help.command()
-async def delete(ctx):
-    await ctx.respond("Supprime un nombre de messages d'un utilisateur, ou du tchat si aucun n'est mentionné\n**Syntaxe:** `°delete [nombre] [@utilisateur]`")
-
-
-@help.command()
-async def stop_pc(ctx):
-    await ctx.respond("Commandes PC (contrôle le PC de Noctabou)\n°stopPC : Eteint le PC dans 30s.\n°stopPC restart : Redémarre le PC dans 30s.\nSi plus d'arguments sont donnés, Eteint le PC dans 30s avec un message sur l'écran.\n°abortPC : Annule l'extinction du PC.\n°startPC : Allume le PC (prend \~1minute) ")
-
-
-@help.command()
-async def mckeepinventory(ctx):
-    await ctx.respond("Change keepInventory\n°MCKeepInventory True : Active la gamerule\n°MCKeepInventory False : Désactive la gamerule\n°MCKeepInventory : Affiche l'état de la gamerule")
-
-@help.command()
-async def mcselectserver(ctx):
-    await ctx.respond("Sélectionne le serveur à utiliser\n°MCSelectServer [serveur] (gérants only) (voué à changer)")
-"""
-"""HELP##############################################################################################################################################################"""
-
-client.run(token, reconnect=True)
+client.run('TOKEN', reconnect=True)

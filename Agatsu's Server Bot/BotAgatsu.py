@@ -30,4 +30,4 @@ async def startServer(ctx):
     os.system("mcServer.sh")
 
 
-client.run("OTg0MDI2MjQ4NDYyMzM2MDYw.G42Dmv.aAIA1WA5STOAaw_OGHBNgA1te4AD0N68W1kY1o")   
+client.run('TOKEN')   
