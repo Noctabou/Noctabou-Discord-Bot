@@ -20,12 +20,21 @@ global actif
 server = False
 nocta = 317596360775958538
 actif= True
+
+import configparser
+config = configparser.RawConfigParser()
+config.read('tokens.properties')
+details_dict = dict(config.items('DscdBot'))
+token = (None, details_dict['token'])[details_dict['token'] != '']
+details_dict = dict(config.items('TwitterToken'))
+twtoken= (None, details_dict['token'])[details_dict['token'] != '']
+
 # Fonctions
 if os.getlogin()=="noctabou":
     server = True
 def get_type_from_url(url):
     idtweet = url.split("/").pop()[0:19]
-    client = tw.Client("AAAAAAAAAAAAAAAAAAAAAGyRZwEAAAAAiAjOI77d5GB6uy074Kf8D3GnfaY%3D5ndbu0KjfWRXCJpu6kr4nhJLYljjfKE9QqUl8P3JbgsIxB72dV")
+    client = tw.Client(twtoken)
     tweet = client.get_tweet(id=idtweet, expansions="attachments.media_keys", media_fields="type")
     if "media" in tweet.includes:
         type = tweet.includes["media"][0].type
@@ -453,4 +462,4 @@ if server:
     running = MCServerRunning()
     print("Server is running: " + str(running))
 """COMMANDS##############################################################################################################################################################"""
-client.run('TOKEN', reconnect=True)
+client.run(token, reconnect=True)
