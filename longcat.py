@@ -6,6 +6,11 @@ from discord.ext import commands
 intents = discord.Intents.default()
 intents.message_content = True
 client = commands.Bot(intents=intents, case_insensitive=False,allowed_mentions=discord.AllowedMentions(everyone=False))
+import configparser
+config = configparser.RawConfigParser()
+config.read('tokens.properties')
+details_dict = dict(config.items('LongCatBot'))
+token = (None, details_dict['token'])[details_dict['token'] != '']
 
 @client.event
 async def on_ready():
@@ -112,4 +117,4 @@ async def portalcatsay(ctx, *, text):
 async def shit(ctx):
     await ctx.respond("<:SEo:655050190973042718><:Efh:672519910567706664><:Nmad:673166882026815533><:Nth:672563359786467329><:Nf:654639061717352449><:Wp:654642045255811082><:St:654639038363598858><:Ehat:672520027874000931>\n<:NEc:654639050917150720><:SWc:654639051793760257><:Et:654639037700898828><:Wt:654639037117890571><:NSctw:654899231445876743><:Bl:654639043891691521><:NSchonk:654899230640439306>\n<:Wf:654639059465011201><:NWc:654639045833523200><:Sh:654639066813431843><:Sf:654639061809496074><:Shat:672520027181940738><:Bl:654639043891691521><:Sp:654642047143116810>")
 
-client.run("TOKEN", reconnect=True)
+client.run(token, reconnect=True)
