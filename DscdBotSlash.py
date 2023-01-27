@@ -23,7 +23,7 @@ actif= True
 
 import configparser
 config = configparser.RawConfigParser()
-config.read('tokens.properties')
+config.read('bot.properties')
 details_dict = dict(config.items('DscdBot'))
 token = (None, details_dict['token'])[details_dict['token'] != '']
 details_dict = dict(config.items('TwitterToken'))
@@ -263,8 +263,8 @@ if server:
 
     """MC SERVER##############################################################################################################################################################"""
     import libtmux
-    server = libtmux.Server()
-    session = server.find_where({"session_name": "MCServer"})
+    serverT = libtmux.Server()
+    session = serverT.find_where({"session_name": "MCServer"})
     if session == None:
         print(os.system("tmux new -d -s MCServer"))  # créer un tmux
         session = server.find_where({"session_name": "MCServer"})

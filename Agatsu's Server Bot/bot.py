@@ -11,6 +11,7 @@ import libtmux
 import subprocess
 
 #fonctions
+#Donne le nombre de joueurs connectés au serveur et vérifie si le serveur est en ligne
 def MCServerPlaying():
     timestop=300
     os.system("tmux send-keys -t MCServer 'list' Enter")
@@ -36,26 +37,31 @@ def MCServerPlaying():
     else:
         output = [lastline[0], lastline[1].split(" players online:")[0], ""]
     return output   
+
 #Variables
 import configparser
 config = configparser.RawConfigParser()
 config.read('bot.properties')
-details_dict = dict(config.items('ConfigBot'))
+details_dict = dict(config.items('AgatsuBot'))
 token = (None, details_dict['token'])[details_dict['token'] != '']
 MCpath = (None, details_dict['mcpath'])[details_dict['mcpath'] != '']
 owners = (None, details_dict['owners'])[details_dict['owners'] != '']
 MCmanagers = (owners, details_dict['mcmanagers'])[details_dict['mcmanagers'] != '']
 
+#Ouvre une session tmux où le serveur est lancé
 server = libtmux.Server()
-session = server.find_where({"session_name": "MCServer"})
-if session == None:
-    print(os.system("tmux new -d -s MCServer"))  # créer un tmux
-    session = server.find_where({"session_name": "MCServer"})
+os.system("tmux new-session -n MC -s MCServer")
+session = server.sessions.get(session_name="MCServer")
 window = session.attached_window
 pane = window.attached_pane
 
+#Liste des serveurs Minecraft dans le dossier séléctionné
 listservers=os.listdir(MCpath)
-serveurMC=listservers[0]
+if len(listservers) == 0:
+    print("Aucun serveur trouvé dans le dossier "+MCpath)
+    serveurMC=None
+else:
+    serveurMC=listservers[0]
 running=False
 
 #bot

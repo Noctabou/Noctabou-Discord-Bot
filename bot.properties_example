@@ -1,0 +1,11 @@
+[DscdBot]
+    token=(DiscordBotToken)
+[LongCatBot]
+    token=(DiscordBotToken)
+[AgatsuBot]
+    token=(DiscordBotToken)
+    mcpath=(MinecraftServerPath)
+    owners=(DiscordID of Owner)
+    mcmanagers=[DiscordID of Minecraft Server Managers, can start and stop the server]
+[TwitterToken]
+    token=(TwitterToken)

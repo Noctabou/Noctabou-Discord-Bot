@@ -8,7 +8,7 @@ intents.message_content = True
 client = commands.Bot(intents=intents, case_insensitive=False,allowed_mentions=discord.AllowedMentions(everyone=False))
 import configparser
 config = configparser.RawConfigParser()
-config.read('tokens.properties')
+config.read('bot.properties')
 details_dict = dict(config.items('LongCatBot'))
 token = (None, details_dict['token'])[details_dict['token'] != '']
 
