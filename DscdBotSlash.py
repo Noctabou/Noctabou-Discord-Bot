@@ -217,6 +217,34 @@ async def crewmate(ctx):
         image.close()
     await ctx.respond("Marcel-Bot n'était pas l'imposter.",ephemeral=True)
 
+if os.path.isfile(os.path.join(os.path.abspath(os.path.dirname(__file__)), "Among-Us-Dumpy-Gif-Maker.jar")):
+    @client.slash_command(description="Créer un gif Twerking Mogus à partir d'une image png.")
+    async def dumpy(ctx, image: str, type: discord.Option(str, choices=["default", "furry", "sans", "spamton", "isaac", "bounce"]), lines: int = None, background: str=None):
+        message=await ctx.respond("Génération du gif en cours...")
+        #download image
+        img = requests.get(image, stream=True)
+        with open('dumpyForeground.png', 'wb') as f:
+            shutil.copyfileobj(img.raw, f)
+        f.close()
+        command=f"java -jar ./Among-Us-Dumpy-Gif-Maker.jar --file dumpyForeground.png --mode {type}"
+        if lines!=None:
+            command+=f" --lines {lines}"
+        if background!=None:
+            if background.startswith("http"):
+                #download image
+                img = requests.get(background, stream=True)
+                with open('dumpyBackground.png', 'wb') as f:
+                    shutil.copyfileobj(img.raw, f)
+                f.close()
+                command+=f" --background dumpyBackground.png"
+            else:
+                if os.path.isfile(os.path.join(os.path.abspath(os.path.dirname(__file__)), background)):
+                    command+=f" --background {background}"
+        else:
+            if os.path.isfile(os.path.join(os.path.abspath(os.path.dirname(__file__)), "backgrounds/black.png")):
+                command+=f" --background backgrounds/black.png" 
+        os.system(command)
+        await message.edit_original_response(content="Enjoy twerking gif",file=discord.File("dumpy.gif"))   
 
 """SERVER ONLY##############################################################################################################################################################"""
 if server:
